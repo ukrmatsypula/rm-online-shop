@@ -6,6 +6,7 @@
         v-for="product in products"
         :key="product.article"
         :product_data="product"
+        @sendDataToParent="showChildArticleInConsole"
       />
     </div>
   </div>
@@ -70,6 +71,11 @@ export default {
       },
     ],
   }),
+  methods: {
+    showChildArticleInConsole(product) {
+      console.log(product)
+    }
+  }
 }
 </script>
 
