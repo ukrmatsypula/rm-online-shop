@@ -1,21 +1,30 @@
 <template>
-  <div class="v-main-catalog">
-    <h1>{{ title }}</h1>
-    <v-catalog-item />
+  <div class="v-catalog">
+    <h1>Catalog</h1>
+    <div class="v-catalog__list">
+      <v-catalog-item />
+    </div>
   </div>
 </template>
 
 <script>
 import vCatalogItem from '@/components/v-catalog-item'
 export default {
-  name: 'v-main-catalog',
+  name: 'v-catalog',
   components: {
     vCatalogItem,
   },
-  data: () => ({
-    title: 'Catalog',
-  }),
+  data: () => ({}),
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.v-catalog {
+  &__list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+</style>
