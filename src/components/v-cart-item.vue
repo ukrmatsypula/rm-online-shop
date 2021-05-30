@@ -10,8 +10,10 @@
       <p>{{ cart_item_data.price }}</p>
       <p>{{ cart_item_data.article }}</p>
     </div>
-    <div class="cart-item__quantity"></div>
-    <button>Delete</button>
+    <div class="cart-item__quantity">
+      Quantity: {{ cart_item_data.quantity }}
+    </div>
+    <button @click="deleteFromCart">Delete</button>
   </div>
 </template>
 
@@ -23,6 +25,14 @@ export default {
       type: Object,
       default: () => ({}),
     },
+  },
+  methods: {
+    deleteFromCart() {
+      this.$emit('deleteFromCart')
+    },
+  },
+  mounted() {
+    this.$set(this.cart_item_data, 'quantity', 1)
   },
 }
 </script>
