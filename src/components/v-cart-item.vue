@@ -14,6 +14,10 @@
       Quantity: {{ cart_item_data.quantity }}
     </div>
     <button @click="deleteFromCart">Delete</button>
+    <div class="cart__total">
+      <p class="total__name">Total:</p>
+      <p>2 300</p>
+    </div>
   </div>
 </template>
 
@@ -34,7 +38,7 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .cart-item {
   display: flex;
   justify-content: space-between;
@@ -46,6 +50,24 @@ export default {
 
   &__image {
     max-width: 50px;
+  }
+}
+
+.cart {
+  margin-bottom: 100px;
+
+  &__total {
+    display: flex;
+    justify-content: center;
+    background-color: #3ddd73;
+    color: #fff;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    z-index: 1;
+    padding: $padding * 3;
+    font-size: 20px;
   }
 }
 </style>
