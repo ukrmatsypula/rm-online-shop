@@ -12,7 +12,11 @@
     </div>
     <div class="cart-item__quantity">
       <p>Qty:</p>
-      <span>{{ cart_item_data.quantity }}</span>
+      <span>
+        <span class="cart-item__quantity-btn" @click="decrementItem">-</span>
+        {{ cart_item_data.quantity }}
+        <span class="cart-item__quantity-btn" @click="incrementItem">+</span>
+      </span>
     </div>
     <button @click="deleteFromCart">Delete</button>
   </div>
@@ -31,11 +35,23 @@ export default {
     deleteFromCart() {
       this.$emit('deleteFromCart')
     },
+    decrementItem() {
+      this.$emit('decrement')
+    },
+    incrementItem() {
+      this.$emit('increment')
+    },
   },
 }
 </script>
 
 <style lang="scss">
+*,
+*:after,
+*:before {
+  box-sizing: border-box;
+}
+
 .cart-item {
   display: flex;
   justify-content: space-between;
@@ -47,6 +63,17 @@ export default {
 
   &__image {
     max-width: 50px;
+  }
+  &__quantity-btn {
+    border-radius: 50%;
+    border: 1px solid rgb(76, 77, 74);
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    user-select: none;
   }
 }
 
