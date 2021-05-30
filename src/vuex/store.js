@@ -21,6 +21,9 @@ const store = new Vuex.Store({
     SET_PRODUCTS_TO_STATE(state, products) {
       state.products = products
     },
+    SET_CART(state, product) {
+      state.cart.push(product)
+    },
   },
   actions: {
     async GET_PRODUCTS_FROM_API({ commit }, payload) {
@@ -35,6 +38,9 @@ const store = new Vuex.Store({
           console.log(err)
           return err
         })
+    },
+    ADD_TO_CART({ commit }, product) {
+      commit('SET_CART', product)
     },
   },
 })
