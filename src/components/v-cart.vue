@@ -11,6 +11,10 @@
       :cart_item_data="item"
       @deleteFromCart="deleteFromCart(index)"
     />
+    <div class="cart__total">
+      <p class="total__name">Total:</p>
+      <p>{{ cartTotalCost }} UAH</p>
+    </div>
   </div>
 </template>
 
@@ -30,6 +34,21 @@ export default {
     cart_data: {
       type: Array,
       default: () => [],
+    },
+  },
+  computed: {
+    cartTotalCost() {
+      let result = []
+
+      for (let item of this.cart_data) {
+        result.push(item.price * item.quantity)
+      }
+
+      result = result.reduce((acc, item) => {
+        acc += item
+        return acc
+      }, 0)
+      return result
     },
   },
   methods: {

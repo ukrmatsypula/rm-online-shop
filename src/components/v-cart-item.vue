@@ -14,10 +14,6 @@
       Quantity: {{ cart_item_data.quantity }}
     </div>
     <button @click="deleteFromCart">Delete</button>
-    <div class="cart__total">
-      <p class="total__name">Total:</p>
-      <p>2 300</p>
-    </div>
   </div>
 </template>
 
