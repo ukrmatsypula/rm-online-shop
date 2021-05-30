@@ -1,7 +1,11 @@
 <template>
   <div class="v-cart">
     <p>{{ title }}</p>
-    <v-cart-item />
+    <v-cart-item
+      v-for="item in cart_data"
+      :key="item.article"
+      :cart_item_data="item"
+    />
   </div>
 </template>
 
@@ -16,6 +20,12 @@ export default {
   data: () => ({
     title: 'Cart',
   }),
+  props: {
+    cart_data: {
+      type: Array,
+      default: () => [],
+    },
+  },
 }
 </script>
 
