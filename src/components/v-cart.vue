@@ -40,15 +40,19 @@ export default {
     cartTotalCost() {
       let result = []
 
-      for (let item of this.cart_data) {
-        result.push(item.price * item.quantity)
-      }
+      if (this.cart_data.length) {
+        for (let item of this.cart_data) {
+          result.push(item.price * item.quantity)
+        }
 
-      result = result.reduce((acc, item) => {
-        acc += item
-        return acc
-      }, 0)
-      return result
+        result = result.reduce((acc, item) => {
+          acc += item
+          return acc
+        }, 0)
+        return result
+      } else {
+        return 0
+      }
     },
   },
   methods: {

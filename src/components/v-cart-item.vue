@@ -11,7 +11,8 @@
       <p>{{ cart_item_data.article }}</p>
     </div>
     <div class="cart-item__quantity">
-      Quantity: {{ cart_item_data.quantity }}
+      <p>Qty:</p>
+      <span>{{ cart_item_data.quantity }}</span>
     </div>
     <button @click="deleteFromCart">Delete</button>
   </div>
