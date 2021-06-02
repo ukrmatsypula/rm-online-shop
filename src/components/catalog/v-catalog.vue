@@ -12,7 +12,7 @@
     />
     <div class="v-catalog__list">
       <v-catalog-item
-        v-for="product in PRODUCTS"
+        v-for="product in this.filteredProducts"
         :key="product.article"
         :product_data="product"
         @addToCart="addToCart"
@@ -48,9 +48,17 @@ export default {
       },
     ],
     selected: 'Все',
+    sortedProducts: [],
   }),
   computed: {
     ...mapGetters(['PRODUCTS', 'CART']),
+    filteredProducts() {
+      if (this.sortedProducts.length) {
+        return this.sortedProducts
+      } else {
+        return this.PRODUCTS
+      }
+    },
   },
   methods: {
     ...mapActions(['GET_PRODUCTS_FROM_API', 'ADD_TO_CART']),
@@ -59,6 +67,12 @@ export default {
     },
     sortByCategories(category) {
       this.selected = category.name
+      this.sortedProducts = []
+      this.PRODUCTS.map(item => {
+        if (item.category === category.name) {
+          this.sortedProducts.push(item)
+        }
+      })
     },
   },
   mounted() {
