@@ -5,6 +5,11 @@
     </router-link>
 
     <h1>Catalog</h1>
+    <v-select
+      :options="categories"
+      :selected="selected"
+      @select="sortByCategories"
+    />
     <div class="v-catalog__list">
       <v-catalog-item
         v-for="product in PRODUCTS"
@@ -19,12 +24,31 @@
 <script>
 import { mapActions, mapGetters } from 'vuex'
 import vCatalogItem from '@/components/catalog/v-catalog-item'
+import vSelect from '@/components/v-select'
+
 export default {
   name: 'v-catalog',
   components: {
     vCatalogItem,
+    vSelect,
   },
-  data: () => ({}),
+  data: () => ({
+    categories: [
+      {
+        name: 'Все',
+        value: 'All',
+      },
+      {
+        name: 'Мужские',
+        value: 'м',
+      },
+      {
+        name: 'Женские',
+        value: 'ж',
+      },
+    ],
+    selected: 'Все',
+  }),
   computed: {
     ...mapGetters(['PRODUCTS', 'CART']),
   },
@@ -32,6 +56,9 @@ export default {
     ...mapActions(['GET_PRODUCTS_FROM_API', 'ADD_TO_CART']),
     addToCart(product) {
       this.ADD_TO_CART(product)
+    },
+    sortByCategories(category) {
+      this.selected = category.name
     },
   },
   mounted() {

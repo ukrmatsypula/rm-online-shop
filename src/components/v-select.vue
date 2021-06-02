@@ -1,6 +1,6 @@
 <template>
   <div class="v-select">
-    <p class="title" @click="isOptionsVisible = !isOptionsVisible">
+    <p class="title" @click.stop="isOptionsVisible = !isOptionsVisible">
       {{ selected }}
     </p>
     <div class="options" v-if="isOptionsVisible">
@@ -41,27 +41,30 @@ export default {
     },
   },
   mounted() {
-    document.addEventListener('click', this.hideSelect.bind(this))
+    document.addEventListener('click', this.hideSelect.bind(this), this)
   },
   beforeDestroy() {
-    document.removeEventListener('click', this.hideSelect)
+    document.removeEventListener('click', this.hideSelect, this)
   },
 }
 </script>
 
 <style lang="scss">
 .title {
+  background-color: #fff;
   border: 1px solid #aeaeae;
 }
 .v-select {
   position: relative;
   width: 200px;
   cursor: pointer;
+  user-select: none;
 }
 .v-select p {
   margin: 0;
 }
 .options {
+  background-color: #fff;
   border: 1px solid #aeaeae;
   position: absolute;
   top: 30px;
