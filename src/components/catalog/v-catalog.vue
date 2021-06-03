@@ -5,12 +5,36 @@
     </router-link>
 
     <h1>Catalog</h1>
-    <v-select
-      :options="categories"
-      :selected="selected"
-      @select="sortByCategories"
-      :isExpanded="IS_DESKTOP"
-    />
+    <div class="filters">
+      <v-select
+        :options="categories"
+        :selected="selected"
+        @select="sortByCategories"
+        :isExpanded="IS_DESKTOP"
+      />
+      <div class="range-slider">
+        <input
+          type="range"
+          min="0"
+          max="10000"
+          step="10"
+          v-model.number="minPrice"
+          @change="setRangeSlider"
+        />
+        <input
+          type="range"
+          min="0"
+          max="10000"
+          step="10"
+          v-model.number="maxPrice"
+          @change="setRangeSlider"
+        />
+      </div>
+      <div class="range-values">
+        <p>Min: {{ minPrice }}</p>
+        <p>Max: {{ maxPrice }}</p>
+      </div>
+    </div>
     <div class="v-catalog__list">
       <v-catalog-item
         v-for="product in this.filteredProducts"
@@ -50,6 +74,8 @@ export default {
     ],
     selected: 'Все',
     sortedProducts: [],
+    minPrice: 0,
+    maxPrice: 10000,
   }),
   computed: {
     ...mapGetters(['PRODUCTS', 'CART', 'IS_MOBILE', 'IS_DESKTOP']),
@@ -66,20 +92,26 @@ export default {
     addToCart(product) {
       this.ADD_TO_CART(product)
     },
-    sortByCategories(category) {
-      this.selected = category.name
-      this.sortedProducts = []
-      this.PRODUCTS.map(item => {
-        if (item.category === category.name) {
-          this.sortedProducts.push(item)
-        }
-      })
+    setRangeSlider() {
+      if (this.minPrice > this.maxPrice) {
+        let tmp = this.maxPrice
+        this.maxPrice = this.minPrice
+        this.minPrice = tmp
+      }
+      this.sortByCategories()
+    },
+    sortByCategories() {
+      this.sortedProducts = [...this.PRODUCTS]
+      this.sortedProducts = this.sortedProducts.filter(
+        item => item.price >= this.minPrice && item.price <= this.maxPrice
+      )
     },
   },
   mounted() {
     this.GET_PRODUCTS_FROM_API().then(resonse => {
       if (resonse) {
         console.log('data arrived')
+        this.sortByCategories()
       }
     })
   },
@@ -101,6 +133,33 @@ export default {
     right: 10px;
     z-index: 1;
     border: 1px solid #aeaeae;
+  }
+
+  .filters {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .range-slider {
+      width: 200px;
+      margin: auto 16px;
+      text-align: center;
+      position: relative;
+    }
+
+    .range-slider svg,
+    .range-slider input[type='range'] {
+      position: absolute;
+      left: 0;
+      bottom: 0;
+    }
+
+    input[type='range']::-webkit-slider-thumb {
+      z-index: 1;
+      position: relative;
+      top: 2px;
+      margin-top: -7px;
+    }
   }
 }
 </style>
