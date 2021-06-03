@@ -29,4 +29,12 @@ export default {
       state.cart[index].quantity--
     }
   },
+  SWITCH_MOBILE(state) {
+    state.isMobile = true
+    state.isDesktop = false
+  },
+  SWITCH_DESKTOP(state) {
+    state.isDesktop = true
+    state.isMobile = false
+  },
 }

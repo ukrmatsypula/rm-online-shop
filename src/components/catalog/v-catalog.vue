@@ -9,6 +9,7 @@
       :options="categories"
       :selected="selected"
       @select="sortByCategories"
+      :isExpanded="IS_DESKTOP"
     />
     <div class="v-catalog__list">
       <v-catalog-item
@@ -51,7 +52,7 @@ export default {
     sortedProducts: [],
   }),
   computed: {
-    ...mapGetters(['PRODUCTS', 'CART']),
+    ...mapGetters(['PRODUCTS', 'CART', 'IS_MOBILE', 'IS_DESKTOP']),
     filteredProducts() {
       if (this.sortedProducts.length) {
         return this.sortedProducts

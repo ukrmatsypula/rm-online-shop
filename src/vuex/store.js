@@ -10,6 +10,8 @@ const store = new Vuex.Store({
   state: {
     products: [],
     cart: [],
+    isMobile: false,
+    isDesktop: true,
   },
   getters,
   mutations,
