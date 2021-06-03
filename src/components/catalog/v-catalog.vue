@@ -100,11 +100,18 @@ export default {
       }
       this.sortByCategories()
     },
-    sortByCategories() {
+    sortByCategories(category) {
       this.sortedProducts = [...this.PRODUCTS]
       this.sortedProducts = this.sortedProducts.filter(
         item => item.price >= this.minPrice && item.price <= this.maxPrice
       )
+
+      if (category) {
+        this.selected = category.name
+        this.sortedProducts = this.sortedProducts.filter(
+          item => item.category === category.name
+        )
+      }
     },
   },
   mounted() {
