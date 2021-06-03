@@ -1,6 +1,23 @@
 <template>
   <div class="v-catalog-item">
-    <v-popup v-if="isInfoPopupVisible" @сlosePopup="onClosePopup" />
+    <v-popup
+      :popupTitle="product_data.name"
+      rightBtnTitle="Add to cart"
+      v-if="isInfoPopupVisible"
+      @сlosePopup="onClosePopup"
+      @rightBtnAction="addToCart"
+    >
+      <img
+        class="v-catalog-item__image"
+        :src="require('@/assets/images/' + product_data.image)"
+        :alt="product_data.name"
+      />
+      <div>
+        <p class="v-catalog-item__name">{{ product_data.name }}</p>
+        <p class="v-catalog-item__price">Price: {{ product_data.price }} UAH</p>
+        <p class="v-catalog-item__category">{{ product_data.category }}</p>
+      </div>
+    </v-popup>
 
     <img
       class="v-catalog-item__image"
