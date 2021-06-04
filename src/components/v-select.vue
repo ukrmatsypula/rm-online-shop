@@ -3,7 +3,7 @@
     <p class="title" @click.stop="isOptionsVisible = !isOptionsVisible">
       {{ selected }}
     </p>
-    <div class="options" v-if="isOptionsVisible || isExpanded">
+    <div class="options" v-if="isOptionsVisible">
       <p
         v-for="option in options"
         :key="option.value"
