@@ -37,4 +37,7 @@ export default {
     state.isDesktop = true
     state.isMobile = false
   },
+  SET_SEARCH_VALUE_TO_STATE(state, value) {
+    state.searchValue = value
+  },
 }

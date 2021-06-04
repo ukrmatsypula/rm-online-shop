@@ -12,6 +12,7 @@ const store = new Vuex.Store({
     cart: [],
     isMobile: false,
     isDesktop: true,
+    searchValue: '',
   },
   getters,
   mutations,

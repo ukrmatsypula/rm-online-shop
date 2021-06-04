@@ -82,4 +82,10 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss">
+.v-catalog__link-to-cart {
+  position: fixed;
+  top: 105px;
+  right: 7px;
+}
+</style>
