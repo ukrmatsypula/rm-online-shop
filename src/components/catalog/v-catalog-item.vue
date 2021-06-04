@@ -14,7 +14,9 @@
       />
       <div>
         <p class="v-catalog-item__name">{{ product_data.name }}</p>
-        <p class="v-catalog-item__price">Price: {{ product_data.price }} UAH</p>
+        <p class="v-catalog-item__price">
+          Price: {{ product_data.price | toFix | formattedPrice }}
+        </p>
         <p class="v-catalog-item__category">{{ product_data.category }}</p>
       </div>
     </v-popup>
@@ -25,7 +27,9 @@
       :alt="product_data.name"
     />
     <p class="v-catalog-item__name">{{ product_data.name }}</p>
-    <p class="v-catalog-item__price">Price: {{ product_data.price }} UAH</p>
+    <p class="v-catalog-item__price">
+      Price: {{ product_data.price | toFix | formattedPrice }}
+    </p>
     <button class="v-catalog-item__show-info" @click="showPopupInfo">
       Show info
     </button>
@@ -37,6 +41,8 @@
 
 <script>
 import vPopup from '@/components/popup/v-popup'
+import toFix from '@/filters/toFix'
+import formattedPrice from '@/filters/price-format'
 
 export default {
   name: 'v-catalog-item',
@@ -53,6 +59,10 @@ export default {
     title: 'catalog-item',
     isInfoPopupVisible: false,
   }),
+  filters: {
+    toFix,
+    formattedPrice,
+  },
   methods: {
     addToCart() {
       this.$emit('addToCart', this.product_data)

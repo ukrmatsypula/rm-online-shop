@@ -31,8 +31,8 @@
         />
       </div>
       <div class="range-values">
-        <p>Min: {{ minPrice }}</p>
-        <p>Max: {{ maxPrice }}</p>
+        <p>Min: {{ minPrice | formattedPrice }}</p>
+        <p>Max: {{ maxPrice | formattedPrice }}</p>
       </div>
     </div>
     <div class="v-catalog__list">
@@ -50,6 +50,7 @@
 import { mapActions, mapGetters } from 'vuex'
 import vCatalogItem from '@/components/catalog/v-catalog-item'
 import vSelect from '@/components/v-select'
+import formattedPrice from '@/filters/price-format'
 
 export default {
   name: 'v-catalog',
@@ -77,6 +78,9 @@ export default {
     minPrice: 0,
     maxPrice: 10000,
   }),
+  filters: {
+    formattedPrice,
+  },
   computed: {
     ...mapGetters(['PRODUCTS', 'CART', 'IS_MOBILE', 'IS_DESKTOP']),
     filteredProducts() {

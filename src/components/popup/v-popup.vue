@@ -57,7 +57,7 @@ export default {
   align-items: center;
   justify-content: center;
   background: rgba(60, 60, 60, 0.4);
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   right: 0;
