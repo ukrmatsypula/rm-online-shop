@@ -81,12 +81,7 @@ export default {
     sortedProducts: [],
     minPrice: 0,
     maxPrice: 10000,
-    messages: [
-      {
-        name: 'notification name',
-        id: Date.now(),
-      },
-    ],
+    messages: [],
   }),
   filters: {
     formattedPrice,
@@ -110,7 +105,13 @@ export default {
   methods: {
     ...mapActions(['GET_PRODUCTS_FROM_API', 'ADD_TO_CART']),
     addToCart(product) {
-      this.ADD_TO_CART(product)
+      this.ADD_TO_CART(product).then(() => {
+        let timeStamp = Date.now().toLocaleString()
+        this.messages.unshift({
+          name: 'Товар добавлен в корзину',
+          id: timeStamp,
+        })
+      })
     },
     setRangeSlider() {
       if (this.minPrice > this.maxPrice) {

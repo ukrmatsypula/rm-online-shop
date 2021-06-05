@@ -6,7 +6,7 @@
       :key="message.id"
     >
       <div class="content__text">
-        <span>Notification name</span>
+        <span>{{ message.name }}</span>
         <i class="material-icons">check_circle</i>
       </div>
       <div class="content__buttons">
@@ -40,9 +40,8 @@ export default {
 .v-notification {
   position: fixed;
   top: 170px;
-  right: 20px;
+  right: 7px;
   z-index: 10;
-  background: $green-bg;
   color: #fff;
 
   &__content {
@@ -52,7 +51,9 @@ export default {
     height: 50px;
     padding: $padding * 4;
     border-radius: 4px;
+    background: $green-bg;
     color: #fff;
+    margin-bottom: 10px;
   }
 
   .content {
