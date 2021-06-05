@@ -1,5 +1,7 @@
 <template>
   <div class="v-catalog">
+    <v-notification :messages="messages" />
+
     <router-link :to="{ name: 'cart', params: { cart_data: CART } }">
       <div class="v-catalog__link-to-cart">Cart: {{ CART.length }}</div>
     </router-link>
@@ -51,12 +53,14 @@ import { mapActions, mapGetters } from 'vuex'
 import vCatalogItem from '@/components/catalog/v-catalog-item'
 import vSelect from '@/components/v-select'
 import formattedPrice from '@/filters/price-format'
+import vNotification from '@/components/notifications/v-notification'
 
 export default {
   name: 'v-catalog',
   components: {
     vCatalogItem,
     vSelect,
+    vNotification,
   },
   data: () => ({
     categories: [
@@ -77,6 +81,12 @@ export default {
     sortedProducts: [],
     minPrice: 0,
     maxPrice: 10000,
+    messages: [
+      {
+        name: 'notification name',
+        id: Date.now(),
+      },
+    ],
   }),
   filters: {
     formattedPrice,
