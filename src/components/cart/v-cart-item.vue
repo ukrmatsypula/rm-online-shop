@@ -18,7 +18,7 @@
         <span class="cart-item__quantity-btn" @click="incrementItem">+</span>
       </span>
     </div>
-    <button @click="deleteFromCart">Delete</button>
+    <button class="btn btn--red" @click="deleteFromCart">Delete</button>
   </div>
 </template>
 

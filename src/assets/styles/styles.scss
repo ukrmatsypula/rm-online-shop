@@ -11,4 +11,12 @@
   &:hover {
     background: $green-bg-hover;
   }
+  &--red {
+    background: red;
+    color: #fff;
+
+    &:hover {
+      background: lightcoral;
+    }
+  }
 }
