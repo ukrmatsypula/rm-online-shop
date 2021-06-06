@@ -30,12 +30,14 @@
     <p class="v-catalog-item__price">
       Price: {{ product_data.price | toFix | formattedPrice }}
     </p>
-    <button class="v-catalog-item__show-info" @click="showPopupInfo">
-      Show info
-    </button>
-    <button class="v-catalog-item__add-to-cart btn" @click="addToCart">
-      add to cart
-    </button>
+    <div class="v-catalog-item__buttons">
+      <button class="v-catalog-item__show-info btn" @click="showPopupInfo">
+        Show info
+      </button>
+      <button class="v-catalog-item__add-to-cart btn" @click="addToCart">
+        add to cart
+      </button>
+    </div>
   </div>
 </template>
 
@@ -84,11 +86,24 @@ export default {
 .v-catalog-item {
   flex-basis: 25%;
   box-shadow: 0 0 8px 0 #e0e0e0;
-  padding: $padding * 2;
+  padding: $padding * 4;
   margin: $margin * 2;
 
   &__image {
     width: 100px;
+  }
+
+  &__buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__show-info {
+    background: orange;
+    &:hover {
+      background: darkorange;
+    }
   }
 }
 </style>
