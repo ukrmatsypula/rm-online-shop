@@ -1,6 +1,6 @@
 <template>
   <div class="v-catalog">
-    <v-notification :messages="messages" />
+    <v-notification :messages="messages" :timeout="4000" />
 
     <router-link :to="{ name: 'cart', params: { cart_data: CART } }">
       <div class="v-catalog__link-to-cart">Cart: {{ CART.length }}</div>
@@ -110,6 +110,7 @@ export default {
         this.messages.unshift({
           name: 'Товар добавлен в корзину',
           id: timeStamp,
+          icon: 'check_circle',
         })
       })
     },

@@ -1,19 +1,22 @@
 <template>
   <div class="v-notification">
-    <div
-      class="v-notification__content"
-      v-for="message in messages"
-      :key="message.id"
-    >
-      <div class="content__text">
-        <span>{{ message.name }}</span>
-        <i class="material-icons">check_circle</i>
+    <transition-group name="v-transition-animate" class="messages-list">
+      <div
+        class="v-notification__content"
+        v-for="message in messages"
+        :key="message.id"
+        :class="message.icon"
+      >
+        <div class="content__text">
+          <span>{{ message.name }}</span>
+          <i class="material-icons">{{ message.icon }}</i>
+        </div>
+        <div class="content__buttons">
+          <button v-if="rightButton">{{ rightButton }}</button>
+          <button v-if="leftButton">{{ leftButton }}</button>
+        </div>
       </div>
-      <div class="content__buttons">
-        <button v-if="rightButton">{{ rightButton }}</button>
-        <button v-if="leftButton">{{ leftButton }}</button>
-      </div>
-    </div>
+    </transition-group>
   </div>
 </template>
 
@@ -33,6 +36,27 @@ export default {
       type: String,
       default: '',
     },
+    timeout: {
+      type: Number,
+      default: 3000,
+    },
+  },
+  methods: {
+    hideNotification() {
+      if (this.messages.length) {
+        setTimeout(() => {
+          this.messages.splice(this.messages.length - 1, 1)
+        }, this.timeout)
+      }
+    },
+  },
+  watch: {
+    messages() {
+      this.hideNotification()
+    },
+  },
+  mounted() {
+    this.hideNotification()
   },
 }
 </script>
@@ -54,6 +78,19 @@ export default {
     background: $green-bg;
     color: #fff;
     margin-bottom: 10px;
+
+    &.error {
+      background: red;
+      color: #fff;
+    }
+    &.warning {
+      background: orange;
+      color: #fff;
+    }
+    &.check-circle {
+      background: green;
+      color: #fff;
+    }
   }
 
   .content {
@@ -64,6 +101,38 @@ export default {
       > i {
         margin-left: 20px;
       }
+    }
+  }
+
+  .v-transition-animate {
+    &-enter {
+      transform: translateX(120px);
+      opacity: 0;
+    }
+
+    &-enter-active {
+      transition: all 0.6s ease;
+    }
+
+    &-enter-to {
+      opacity: 1;
+    }
+
+    &-leave {
+      height: 50px;
+      opacity: 1;
+    }
+    &-leave-active {
+      transition: transform 0.6s ease, opacity 0.6s, height 0.6s 0.2s;
+    }
+    &-leave-to {
+      height: 0;
+      transform: translateX(120px);
+      opacity: 0;
+    }
+
+    &-move {
+      transition: transform 0.6s ease;
     }
   }
 }
