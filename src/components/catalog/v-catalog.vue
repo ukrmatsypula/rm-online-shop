@@ -43,6 +43,7 @@
         :key="product.article"
         :product_data="product"
         @addToCart="addToCart"
+        @productClick="productClick"
       />
     </div>
   </div>
@@ -144,6 +145,9 @@ export default {
       } else {
         this.sortedProducts = this.PRODUCTS
       }
+    },
+    productClick(article) {
+      this.$router.push({ name: 'product', query: { product: article } })
     },
   },
   watch: {

@@ -3,7 +3,7 @@
     <div class="v-popup">
       <div class="v-popup__header">
         <span>{{ popupTitle }}</span>
-        <i class="material-icons v-popup__close" @click="closePopup">
+        <i class="material-icons v-popup__close" @click.stop="closePopup">
           close
         </i>
       </div>

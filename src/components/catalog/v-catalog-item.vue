@@ -1,5 +1,5 @@
 <template>
-  <div class="v-catalog-item">
+  <div class="v-catalog-item" @click="productClick">
     <v-popup
       :popupTitle="product_data.name"
       rightBtnTitle="Add to cart"
@@ -31,10 +31,10 @@
       Price: {{ product_data.price | toFix | formattedPrice }}
     </p>
     <div class="v-catalog-item__buttons">
-      <button class="v-catalog-item__show-info btn" @click="showPopupInfo">
+      <button class="v-catalog-item__show-info btn" @click.stop="showPopupInfo">
         Show info
       </button>
-      <button class="v-catalog-item__add-to-cart btn" @click="addToCart">
+      <button class="v-catalog-item__add-to-cart btn" @click.stop="addToCart">
         add to cart
       </button>
     </div>
@@ -75,6 +75,9 @@ export default {
     onClosePopup() {
       this.isInfoPopupVisible = false
     },
+    productClick() {
+      this.$emit('productClick', this.product_data.article)
+    },
   },
   mounted() {
     this.$set(this.product_data, 'quantity', 1)
@@ -88,6 +91,7 @@ export default {
   box-shadow: 0 0 8px 0 #e0e0e0;
   padding: $padding * 4;
   margin: $margin * 2;
+  cursor: pointer;
 
   &__image {
     width: 100px;
