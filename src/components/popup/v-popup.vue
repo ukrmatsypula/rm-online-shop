@@ -11,8 +11,8 @@
         <slot></slot>
       </div>
       <div class="v-popup__footer">
-        <button class="close-modal" @click="closePopup">Close</button>
-        <button class="submit-btn" @click="rightBtnAction">
+        <button class="close-modal" @click.stop="closePopup">Close</button>
+        <button class="submit-btn" @click.stop="rightBtnAction">
           {{ rightBtnTitle }}
         </button>
       </div>
