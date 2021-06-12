@@ -1,7 +1,6 @@
 <template>
   <div>
     <h2>product-page</h2>
-    {{ product.image }}
     <img
       class="v-catalog-item__image"
       v-if="product.image"
